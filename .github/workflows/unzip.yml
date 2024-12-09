@@ -1,25 +1,25 @@
-name: Unzip Next.js Main File
+name: Unzip File
 
 on:
-  workflow_dispatch: # Allows manual trigger of the workflow
+  workflow_dispatch: # Trigger the workflow manually
 
 jobs:
   unzip:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
+      # Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Unzip the uploaded file
-      - name: Unzip nextjs-main.zip
+      # Unzip the file
+      - name: Unzip the File
         run: |
           unzip nextjs-main.zip -d nextjs-main
           rm nextjs-main.zip
-      
-      # Step 3: Commit and push extracted files
-      - name: Commit and Push Extracted Files
+
+      # Commit the changes
+      - name: Commit and Push Changes
         run: |
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
