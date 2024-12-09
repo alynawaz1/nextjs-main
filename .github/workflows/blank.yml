@@ -1,44 +1,28 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
- name: Unzip File
+name: Unzip Next.js Main File
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Allows manual trigger of the workflow
 
 jobs:
   unzip:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Unzip file
+      # Step 2: Unzip the uploaded file
+      - name: Unzip nextjs-main.zip
         run: |
-          unzip filename.zip -d extracted_files
-          rm filename.zip
+          unzip nextjs-main.zip -d nextjs-main
+          rm nextjs-main.zip
       
-      - name: Commit and push changes
+      # Step 3: Commit and push extracted files
+      - name: Commit and Push Extracted Files
         run: |
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
-          git add extracted_files
-          git commit -m "Unzipped file"
+          git add .
+          git commit -m "Unzipped nextjs-main.zip"
           git push
-
